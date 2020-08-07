@@ -39,7 +39,8 @@ pages:
   stage: deploy
   script:
     - mkdir public/
-    - cp docs/index.html public/index.html
+    - cp docs/index.html public/
+    - cp docs/resources.css public/
     - cp -r html public/
 #     - julia -e 'using InteractiveUtils;
 #                 versioninfo()'
