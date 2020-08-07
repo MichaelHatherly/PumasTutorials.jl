@@ -24,7 +24,7 @@ build:
        Pkg.instantiate();
        using PumasTutorials;
        PumasTutorials.weave_file("introduction","introduction.jmd",
-       (:script,:html,:notebook))'
+       (:script,:html,))'
   artifacts:
     paths:
       - html
