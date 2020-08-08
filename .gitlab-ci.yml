@@ -13,7 +13,7 @@ cache:
     - .julia/compiled/v1.4
     - html
 
-build:pkpd:
+.template: &template
   stage: build
   script:
     - julia -e 'using InteractiveUtils;
@@ -23,7 +23,7 @@ build:pkpd:
       'using Pkg;
        Pkg.instantiate();
        using PumasTutorials;
-       PumasTutorials.weave_folder("pkpd", (:script,:html,))'
+       PumasTutorials.weave_folder("$GROUP", (:script,:html,))'
   artifacts:
     paths:
       - html
@@ -32,7 +32,17 @@ build:pkpd:
     refs:
       - merge_requests
     changes:
-      - html/pkpd/*
+      - html/$GROUP/*
+
+build:introduction:
+  <<: *template
+  variables:
+    GROUP: "introduction"
+
+build:pkpd:
+  <<: *template
+  variables:
+    GROUP: "pkpd"
 
 pages:
   stage: deploy
