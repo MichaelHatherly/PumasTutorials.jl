@@ -32,7 +32,7 @@ cache:
     refs:
       - merge_requests
     changes:
-      - html/$GROUP/*
+      - tutorials/$GROUP/*
 
 build:introduction:
   <<: *template
