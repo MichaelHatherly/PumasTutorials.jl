@@ -13,7 +13,28 @@ cache:
     - .julia/compiled/v1.4
     - html
 
-.template: &template
+# build:introduction:
+#   stage: build
+#   script:
+#     - julia -e 'using InteractiveUtils;
+#                 versioninfo()'
+#     - >
+#       julia --color=yes --project=. -e
+#       'using Pkg;
+#        Pkg.instantiate();
+#        using PumasTutorials;
+#        PumasTutorials.weave_folder("introduction", (:script,:html,))'
+#   artifacts:
+#     paths:
+#       - html
+#     expire_in: 1 week
+#   only:
+#     refs:
+#       - external_pull_requests
+#     changes:
+#       - tutorials/introduction/*
+
+build:pkpd1:
   stage: build
   script:
     - julia -e 'using InteractiveUtils;
@@ -23,7 +44,7 @@ cache:
       'using Pkg;
        Pkg.instantiate();
        using PumasTutorials;
-       PumasTutorials.weave_folder("$GROUP", (:script,:html,))'
+       PumasTutorials.weave_folder("pkpd", (:script,:html,))'
   artifacts:
     paths:
       - html
@@ -32,17 +53,59 @@ cache:
     refs:
       - external_pull_requests
     changes:
-      - tutorials/$GROUP/*
+      - tutorials/pkpd/absorption_models.jmd
 
-build:introduction:
-  <<: *template
-  variables:
-    GROUP: "introduction"
+build:pkpd2:
+  stage: build
+  script:
+    - julia -e 'using InteractiveUtils;
+                versioninfo()'
+    - >
+      julia --color=yes --project=. -e
+      'using Pkg;
+       Pkg.instantiate();
+       using PumasTutorials;
+       PumasTutorials.weave_folder("pkpd", (:script,:html,))'
+  artifacts:
+    paths:
+      - html
+    expire_in: 1 week
+  only:
+    refs:
+      - external_pull_requests
+    changes:
+      - tutorials/pkpd/indirect_response_models.jmd
 
-build:pkpd:
-  <<: *template
-  variables:
-    GROUP: "pkpd"
+# .template: &template
+#   stage: build
+#   script:
+#     - julia -e 'using InteractiveUtils;
+#                 versioninfo()'
+#     - >
+#       julia --color=yes --project=. -e
+#       'using Pkg;
+#        Pkg.instantiate();
+#        using PumasTutorials;
+#        PumasTutorials.weave_folder("$GROUP", (:script,:html,))'
+#   artifacts:
+#     paths:
+#       - html
+#     expire_in: 1 week
+#   only:
+#     refs:
+#       - external_pull_requests
+#     changes:
+#       - tutorials/$GROUP/*
+
+# build:introduction:
+#   <<: *template
+#   variables:
+#     GROUP: "introduction"
+
+# build:pkpd:
+#   <<: *template
+#   variables:
+#     GROUP: "pkpd"
 
 pages:
   stage: deploy
