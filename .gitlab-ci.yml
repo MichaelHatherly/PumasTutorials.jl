@@ -50,10 +50,8 @@ build:pkpd1:
       - html
     expire_in: 1 week
   only:
-    refs:
-      - external_pull_requests
     changes:
-      - tutorials/pkpd/absorption_models.jmd
+      - "tutorials/pkpd/absorption_models.jmd"
 
 build:pkpd2:
   stage: build
@@ -71,10 +69,8 @@ build:pkpd2:
       - html
     expire_in: 1 week
   only:
-    refs:
-      - external_pull_requests
     changes:
-      - tutorials/pkpd/indirect_response_models.jmd
+      - "tutorials/pkpd/indirect_response_models.jmd"
 
 # .template: &template
 #   stage: build
