@@ -30,7 +30,7 @@ cache:
     expire_in: 1 week
   only:
     refs:
-      - merge_requests
+      - external_pull_requests
     changes:
       - tutorials/$GROUP/*
 
@@ -57,5 +57,4 @@ pages:
   only:
   - master
   - tags
-  - external
-  - pushes
+  - external_pull_requests
