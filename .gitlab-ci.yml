@@ -13,6 +13,10 @@ cache:
     - .julia/compiled/v1.4
     - html
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BEFORE_SHA != '0000000000000000000000000000000000000000'
+
 # build:introduction:
 #   stage: build
 #   script:
@@ -49,9 +53,10 @@ build:pkpd1:
     paths:
       - html
     expire_in: 1 week
-  only:
-    changes:
+  rules:
+    - changes:
       - "tutorials/pkpd/absorption_models.jmd"
+      when: manual
 
 build:pkpd2:
   stage: build
@@ -68,9 +73,10 @@ build:pkpd2:
     paths:
       - html
     expire_in: 1 week
-  only:
-    changes:
+  rules:
+    - changes:
       - "tutorials/pkpd/indirect_response_models.jmd"
+      when: manual
 
 # .template: &template
 #   stage: build
